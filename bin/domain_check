@@ -43,4 +43,7 @@ end
 
 opt_parser.parse!(ARGV)
 
-DomainCheck.new(**options).check
+DomainCheck.new(**options).check do |result|
+  formatter = DomainCheck::ConsoleFormatter.new(result)
+  formatter.format
+end

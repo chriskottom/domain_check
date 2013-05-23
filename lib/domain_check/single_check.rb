@@ -10,33 +10,22 @@ class DomainCheck::SingleCheck
   def check
     whois = Whois.whois(@domain)
     if whois.available?
-      puts "#{ @domain.ljust(24).ansi.bold.blue } #{ "AVAILABLE".ansi.bold.green }"
+      { :domain => @domain, :status => :available }
     else
+      result = { :domain => @domain, :status => :registered }
+
       contact = whois.registrant_contact || whois.admin_contact ||
         whois.technical_contact || whois.contacts.first
-      created = whois.created_on
-      expires = whois.expires_on
-      facts = []
-      if contact
-        name    = contact.name if contact
-        email   = contact.email if contact
-        facts << "contact: #{ name }" if name
-        facts << "email: #{ email }" if email
-      end
-      if created
-        facts << "since: #{ created.to_date.to_s }"
-      end
-      if expires
-        if expires.to_date - Date.today < 60
-          facts << "expires: #{ expires.to_date.to_s }".ansi.yellow.bold
-        else
-          facts << "expires: #{ expires.to_date.to_s }"
-        end
-      end
-      puts "#{ @domain.ljust(24).ansi.bold.blue } #{ "REGISTERED".ansi.red.bold }" +
-        (", #{ facts.join(", ") }" if facts)
+      result[:contact_name] = contact.name if contact
+      result[:contact_email] = contact.email if contact
+
+      result[:created_at] = whois.created_on
+      result[:expires_at] = whois.expires_on
+
+      yield(result) if block_given?
+      result
     end
   rescue Whois::Error
-    puts "#{ @domain.ljust(24).ansi.bold.blue } #{ "UNKNOWN".ansi.red.negative.bold }"
+    { :domain => @domain, :status => :unknown }
   end
 end

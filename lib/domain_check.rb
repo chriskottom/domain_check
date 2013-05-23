@@ -1,6 +1,7 @@
 require "yaml"
 
 require_relative "domain_check/version"
+require_relative "domain_check/console_formatter"
 require_relative "domain_check/multi_check"
 require_relative "domain_check/single_check"
 

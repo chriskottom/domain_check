@@ -9,9 +9,13 @@ class DomainCheck::MultiCheck
   end
 
   def check
+    results = []
     domains.each do |domain|
-      DomainCheck::SingleCheck.new(domain).check
+      result = DomainCheck::SingleCheck.new(domain).check
+      yield result if block_given?
+      results << result
     end
+    results
   end
 
   protected

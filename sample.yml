@@ -1,0 +1,9 @@
+prefixes:
+  - super
+  - mega
+suffixes:
+  - corp
+  - plex
+tlds:
+  - com
+  - net

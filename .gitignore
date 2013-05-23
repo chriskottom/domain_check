@@ -1,0 +1,35 @@
+# Emacs temporary files
+*~
+\#*\#
+.\#*
+
+# Bundler artifacts
+.bundle
+bundler_stubs/
+vendor/
+
+# Ruby / Rails operational files
+.rvmrc
+.ruby-version
+
+# Anything temporary
+*.old
+*.swp
+*.swo
+tmp
+
+# Rubygems artifacts
+*.gem
+
+# Test artifacts
+coverage
+spec/reports
+test/tmp
+test/version_tmp
+
+# Documentation
+.yardoc
+_yardoc
+doc
+rdoc
+

@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+require 'domain_check'
+require 'date'
+require 'optparse'
+
+options = { }
+opt_parser = OptionParser.new do |opts|
+  opts.banner = "Usage: domain_check [options]"
+
+  opts.separator ""
+  opts.separator "Specific options:"
+
+  opts.on("-d", "--domain DOMAIN", "Check the availability of DOMAIN") do |dom|
+    options[:domain] = dom
+  end
+
+  opts.on("-f", "--file FILE",
+          "Pass in a YAML configuration file at FILE") do |file|
+    options[:file] = file
+  end
+
+  opts.on("-p", "--prefixes KW1,KW2,...",
+          "Create domain names starting with each keyword and check them") do |prefixes|
+    options[:prefixes] = prefixes.split(/,/)
+  end
+
+  opts.on("-s", "--suffixes KW1,KW2,...",
+          "Create domain names ending with each keyword and check them") do |suffixes|
+    options[:suffixes] = suffixes.split(/,/)
+  end
+
+  opts.on("-t", "--tlds TLD1,TLD2,...",
+          "Create domain names with each of the TLDs and check them") do |tlds|
+    options[:tlds] = tlds.split(/,/)
+  end
+
+  opts.on_tail("-?", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+end
+
+opt_parser.parse!(ARGV)
+
+DomainCheck.new(**options).check

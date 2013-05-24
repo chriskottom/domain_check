@@ -14,7 +14,7 @@ module DomainCheck
     elsif file
       config = parse_file(file)
       MultiCheck.new(prefixes: config['prefixes'], suffixes: config['suffixes'], tlds: config['tlds'])
-    elsif prefixes && suffixes && tlds
+    elsif prefixes && suffixes
       MultiCheck.new(prefixes: prefixes, suffixes: suffixes, tlds: tlds)
     elsif prefixes || suffixes || tlds
       raise ArgumentError, "Must supply prefixes, suffixes, and TLDs"

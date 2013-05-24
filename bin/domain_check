@@ -4,7 +4,9 @@ require 'domain_check'
 require 'date'
 require 'optparse'
 
-options = { }
+options        = { }
+format_options = { }
+
 opt_parser = OptionParser.new do |opts|
   opts.banner = "Usage: domain_check [options]"
 
@@ -35,6 +37,10 @@ opt_parser = OptionParser.new do |opts|
     options[:tlds] = tlds.split(/,/)
   end
 
+  opts.on("-a", "--available-only", "Only show available domains") do |available|
+    format_options[:available_only] = available
+  end
+
   opts.on_tail("-?", "--help", "Show this message") do
     puts opts
     exit
@@ -44,6 +50,6 @@ end
 opt_parser.parse!(ARGV)
 
 DomainCheck.new(**options).check do |result|
-  formatter = DomainCheck::ConsoleFormatter.new(result)
+  formatter = DomainCheck::ConsoleFormatter.new(result, format_options[:available_only])
   formatter.format
 end

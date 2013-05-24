@@ -2,12 +2,15 @@ require "ansi"
 require "date"
 
 class DomainCheck::ConsoleFormatter
-  def initialize(result)
+  def initialize(result, available_only = false)
     @result = result
+    @available_only = available_only
   end
 
   def format
     if @result
+      return if @available_only && @result[:status] != :available
+
       domain = @result[:domain].ljust(24).ansi.bold.blue
 
       if @result[:status] == :available

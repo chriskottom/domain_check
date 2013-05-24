@@ -36,8 +36,7 @@ class DomainCheck::ConsoleFormatter
           created: created_on, expires: expires_in }
         params.reject! { |k,v| v.nil? }
         param_string = params.to_a.map { |a| "#{ a[0] }: #{ a[1] }" }.join(", ")
-        puts "#{ domain } #{ status }" + 
-          (", #{ params.to_a.map { |a| "#{ a[0] }: #{ a[1] }" }.join(", ") }")
+        puts "#{ domain } #{ status }" + (", #{ param_string }" if param_string)
 
       elsif @result[:status] == :unknown
         puts "#{ domain } #{ "UNKNOWN".ansi.red.negative.bold }"

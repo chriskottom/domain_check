@@ -30,7 +30,7 @@ invoked in three ways:
 
 Check the availability of a single domain by passing the `-d` or `--domain`:
 
-```bash
+```shell
 $ bin/domain_check -d google.com
 google.com               REGISTERED, contact: Dns Admin, email: dns-admin@google.com, since: 1997-09-15, expires: 2020-09-13
 
@@ -39,7 +39,7 @@ google.com               REGISTERED, contact: Dns Admin, email: dns-admin@google
 Check the availability of a multiple domains formed by combining keywords and
 top-level domains using three arguments:
 
-```bash
+```shell
 $ bin/domain_check -p super,mega -s corp,plex -t com,net
 supercorp.com            REGISTERED, since: 2002-05-09, expires: 2014-05-09
 supercorp.net            AVAILABLE

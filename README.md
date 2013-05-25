@@ -33,7 +33,7 @@ Check the availability of a single domain by passing the `-d` or `--domain`:
 ```shell
 $ bin/domain_check -d google.com
 google.com               REGISTERED, contact: Dns Admin, email: dns-admin@google.com, since: 1997-09-15, expires: 2020-09-13
-
+```
 ### 2. Multiple domain check
 
 Check the availability of a multiple domains formed by combining keywords and
@@ -49,6 +49,7 @@ megacorp.com             REGISTERED, since: 1997-12-30, expires: 2013-12-29
 megacorp.net             REGISTERED, contact: Misunderstood Computer God, since: 1998-06-04, expires: 2013-06-03
 megaplex.com             REGISTERED, since: 1995-08-19, expires: 2014-08-18
 megaplex.net             REGISTERED, since: 1999-02-15, expires: 2014-02-15
+```
 
 ### 3. Pass a YAML file
 
@@ -65,6 +66,7 @@ suffixes:
 tlds:
   - com
   - net
+```
 
 This should produce the same output as shown in #2 above.
 
